@@ -10,6 +10,13 @@ DEBUG = True
 #list of domains allowed to make cross-site requests to the site, add this because we are goignt o use nginx
 CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
 
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+EMAIL_HOST = env("EMAIL_HOST", default="mailhog")
+EMAIL_PORT = env("EMAIL_PORT")
+DEFAULT_FROM_EMAIL = "marilynjmarquez@gmail.com"
+DOMAIN = env("DOMAIN")
+SITE_NAME="Authors Haven"
+
 
 
 #to generate secret key: python -c "import secrets; print(secrets.token_urlsafe(38))"
