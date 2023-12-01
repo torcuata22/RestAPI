@@ -1,10 +1,9 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.conf import settings
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
-
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -15,11 +14,12 @@ schema_view = get_schema_view(
         license=openapi.License(name="MIT")
     ),
     public=True,
-    permission_classes=(permissions.AllowAny),
+    permission_classes=(permissions.AllowAny,),  # Note the comma at the end
 )
+
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    path("redoc/", schema_view.with_ui("redoc", cache_timeout=0)),
+    path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="redoc"),  # Add a name for the URL
 ]
 
 admin.site.site_header = "Authors Haven API Admin"
