@@ -4,6 +4,8 @@ from .base import env
 SECRET_KEY = env("DJANGO_SECRET_KEY", 
                  default="oYBpGb6kBOZOoRURy8D4uDJNep4AE320spVr-rgppMIg2t2ZAxc",)
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

@@ -10,9 +10,9 @@ services:
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
     expose:
-      - "8000"
+      - "8000:8000"
     env_file:
-      - ./.envs/.local/.django
+      - ./.envs/.local/.env
       - ./.envs/.local/.postgres
     depends_on:
       - postgres
@@ -54,7 +54,7 @@ services:
     volumes: 
       - .:/app 
     env_file:
-      - ./.envs/.local/.django
+      - ./.envs/.local/.env
       - ./.envs/.local/.postgres 
     depends_on:
       - redis
@@ -71,7 +71,7 @@ services:
     volumes:
       - flower_data:/data
     env_file:
-      - ./.envs/.local/.django
+      - ./.envs/.local/.env
       - ./.envs/.local/.postgres
     ports: 
       - "5555:5555"

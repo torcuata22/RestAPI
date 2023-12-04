@@ -18,7 +18,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path(settings.ADMIN_URL, admin.site.urls),
+    path("admin/", admin.site.urls), #used to be:settings.ADMIN_URL, which had route of "supersecret/" but this was causing problmes in nginx
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="redoc"),  # Add a name for the URL
 ]
 
