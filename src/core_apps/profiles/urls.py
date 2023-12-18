@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import ProfileListAPIView, ProfileDetailAPIView, UpdateProfileAPIView, FollowerListView, FollowAPIView, UnfollowAPIView 
 
-url_patterns = [
+urlpatterns = [
     path("all/", ProfileListAPIView.as_view(), name="all-profiles"),
     path("me/", ProfileDetailAPIView.as_view(), name="my-profile"),
     path("me/update/", UpdateProfileAPIView.as_view(), name="update-profile"),

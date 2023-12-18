@@ -1,4 +1,4 @@
-from rest_framework import APIException
+from rest_framework.exceptions import APIException
 
 #in case user tries to follow themselves:
 class CantFollowYourself(APIException):
