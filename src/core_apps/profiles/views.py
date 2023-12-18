@@ -28,7 +28,7 @@ class ProfileListAPIView(generics.ListAPIView):
     renderer_classes = (ProfilesJSONRenderer,)
 
 #retrieve single user profile:
-class ProfileAPIView(generics.RetrieveAPIView):
+class ProfileDetailAPIView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
     renderer_classes = [ProfileJSONRenderer]
