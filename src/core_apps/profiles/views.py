@@ -110,11 +110,11 @@ class FollowAPIView(APIView):
             
             #check if use is already following:
             if user_profile.check_following(profile):
-               formatted_response = {
+                formatted_response = {
                 "status_code":status.HTTP_400_BAD_REQUEST,
                 "message": f"You are already following {profile.user.first_name} {profile.user.last_name}"
             } 
-               return Response(formatted_response, status=status.HTTP_400_BAD_REQUEST)
+                return Response(formatted_response, status=status.HTTP_400_BAD_REQUEST)
             
             #follow profile
             user_profile.follow()
@@ -134,3 +134,27 @@ class FollowAPIView(APIView):
         
 
 #unfollow other users:
+class UnfollowAPIView(APIView):
+    def post(self, request, user_id, format=None):
+        try:
+            user_profile = request.user.profile
+            profile = Profile.objects.get(user__id=user_id)
+            
+            #check if not following:
+            if not user_profile.check_following(profile):
+                formatted_response = {
+                "status_code":status.HTTP_400_BAD_REQUEST,
+                "message": f"You can't unfollow {profile.user.first_name} {profile.user.last_name}, because you are not following them."
+            } 
+                return Response(formatted_response, status=status.HTTP_400_BAD_REQUEST)
+            
+            #follow profile
+            user_profile.unfollow()
+            formatted_response = {
+                "status_code":status.HTTP_200_OK,
+                "message": f"You have unfollowed {profile.user.first_name} {profile.user.last_name}, because you are not following them."
+            } 
+            return Response(formatted_response, status=status.HTTP_200_OK)
+            
+        except Profile.DoesNotExist:
+            raise NotFound("You can't follow a profile that doesn't exist")
